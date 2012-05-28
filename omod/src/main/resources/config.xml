@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE module PUBLIC "-//OpenMRS//DTD OpenMRS Config 1.0//EN" "http://resources.openmrs.org/doctype/config-1.2.dtd">
+
+<module configVersion="1.2">
+	
+    <!-- Base Module Properties -->
+    <id>@MODULE_ID@</id>
+    <name>@MODULE_NAME@</name>
+    <version>@MODULE_VERSION@.${buildNumber}</version>
+    <package>@MODULE_PACKAGE@</package>
+    <author>OpenMRS</author>
+    <description>
+        Publishes Rest Web Service Resources for OpenMRS 1.9 API
+    </description>
+    <activator>@MODULE_PACKAGE@.Activator</activator>
+
+    <updateURL>https://modules.openmrs.org/modules/download/webservices.rest19ext/update.rdf</updateURL>
+    <!-- /Base Module Properties -->
+	
+    <require_version>1.9.0</require_version>
+    <require_modules>
+        <require_module>org.openmrs.module.webservices.rest</require_module>
+    </require_modules>
+	
+    <!-- Extensions -->
+	
+    <!-- AOP -->
+	
+    <!-- Required Privileges -->
+
+    <!-- Required Global Properties -->
+    
+
+    <!-- DWR -->
+	
+    <!-- Servlets -->
+	
+    <!-- Filters -->
+	
+    <!-- Internationalization -->
+    <!-- All message codes should start with moduleId.* -->
+    <messages>
+        <lang>en</lang>
+        <file>messages.properties</file>
+    </messages>
+    <!-- /Internationalization -->
+	
+    <mappingFiles>
+        ${omodHbmConfig}
+    </mappingFiles>
+</module>
