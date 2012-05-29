@@ -34,6 +34,8 @@ public class LocationAttributeResourceTest extends BaseDelegatingResourceTest<Lo
 		super.validateDefaultRepresentation();
 		assertPropEquals("name", getObject().getName());
 		assertPropEquals("description", getObject().getDescription());
+		assertPropEquals("minOccurs", getObject().getMinOccurs());
+		assertPropEquals("maxOccurs", getObject().getMaxOccurs());
 		assertPropEquals("datatypeClassname", getObject().getDatatypeClassname());
 		assertPropEquals("preferredHandlerClassname", getObject().getPreferredHandlerClassname());
 		assertPropEquals("retired", getObject().getRetired());
