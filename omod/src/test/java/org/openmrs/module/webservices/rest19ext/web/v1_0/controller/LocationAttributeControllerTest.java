@@ -72,7 +72,7 @@ public class LocationAttributeControllerTest extends BaseModuleWebContextSensiti
 	@Test
 	public void shouldAddAttributeToLocation() throws Exception {
 		int before = service.getLocationByUuid(Rest19ExtTestConstants.LOCATION_UUID).getAttributes().size();
-		String json = "{ \"attributeType\":\"b3b6d540-a32e-44c7-91b3-292d97667518\", \"value\":\"testing\"}";
+		String json = "{ \"attributeType\":\"9516cc50-6f9f-132r-5433-001e378eb67f\", \"value\":\"2005-01-01T00:00:00\"}";
 		SimpleObject post = new ObjectMapper().readValue(json, SimpleObject.class);
 		controller.create(Rest19ExtTestConstants.LOCATION_UUID, post, request, response);
 		int after = service.getLocationByUuid(Rest19ExtTestConstants.LOCATION_UUID).getAttributes().size();

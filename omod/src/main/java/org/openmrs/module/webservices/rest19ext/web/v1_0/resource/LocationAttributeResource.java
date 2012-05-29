@@ -29,7 +29,7 @@ import org.openmrs.module.webservices.rest.web.resource.impl.DelegatingResourceD
 import org.openmrs.module.webservices.rest.web.resource.impl.DelegatingSubResource;
 import org.openmrs.module.webservices.rest.web.resource.impl.NeedsPaging;
 import org.openmrs.module.webservices.rest.web.response.ResponseException;
-import org.openmrs.module.webservices.rest.web.v1_0.resource.LocationResource;
+import org.openmrs.module.webservices.rest19ext.web.v2_0.resource.LocationResource;
 
 /**
  * {@link Resource} for LocationAttributes, supporting standard CRUD operations

@@ -25,10 +25,10 @@
         	http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd">
 
 	
-    <!-- so spring finds the Handlers for the v1.0 resources -->
     <context:component-scan base-package="org.openmrs.module.webservices.rest19ext.web.v1_0.resource"/>
+    <context:component-scan base-package="org.openmrs.module.webservices.rest19ext.web.v2_0.resource"/>
 	
-    <!-- so spring finds our v1.0 controllers -->
-    <context:component-scan base-package="org.openmrs.module.webservices.rest19ext.web.v1_0.controller" />
+    <context:component-scan base-package="org.openmrs.module.webservices.rest19ext.web.v1_0.controller"/>
+    <context:component-scan base-package="org.openmrs.module.webservices.rest19ext.web.v2_0.controller"/>
     
 </beans>
