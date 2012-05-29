@@ -55,6 +55,8 @@ public class LocationAttributeTypeResource extends MetadataDelegatingCrudResourc
 			description.addProperty("display", findMethod("getDisplayString"));
 			description.addProperty("name");
 			description.addProperty("description");
+			description.addProperty("minOccurs");
+			description.addProperty("maxOccurs");
 			description.addProperty("datatypeClassname");
 			description.addProperty("preferredHandlerClassname");
 			description.addProperty("retired");
@@ -93,7 +95,6 @@ public class LocationAttributeTypeResource extends MetadataDelegatingCrudResourc
 		description.addProperty("description");
 		description.addProperty("minOccurs");
 		description.addProperty("maxOccurs");
-		description.addProperty("datatypeClassname");
 		description.addProperty("datatypeConfig");
 		description.addProperty("preferredHandlerClassname");
 		description.addProperty("handlerConfig");

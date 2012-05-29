@@ -58,7 +58,7 @@ public class LocationAttributeResource extends DelegatingSubResource<LocationAtt
 			description.addProperty("display", findMethod("getDisplayString"));
 			description.addProperty("uuid");
 			description.addProperty("value");
-			description.addProperty("attributeType", Representation.REF);
+			description.addProperty("attributeType", Representation.DEFAULT);
 			description.addProperty("voided");
 			description.addProperty("auditInfo", findMethod("getAuditInfo"));
 			description.addSelfLink();

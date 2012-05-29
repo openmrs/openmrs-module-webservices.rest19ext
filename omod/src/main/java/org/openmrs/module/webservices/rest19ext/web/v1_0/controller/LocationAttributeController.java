@@ -13,19 +13,19 @@
  */
 package org.openmrs.module.webservices.rest19ext.web.v1_0.controller;
 
-import org.openmrs.PersonAttribute;
+import org.openmrs.LocationAttribute;
 import org.openmrs.module.webservices.rest.web.RestConstants;
 import org.openmrs.module.webservices.rest.web.v1_0.controller.BaseSubResourceController;
-import org.openmrs.module.webservices.rest.web.v1_0.resource.PersonAttributeResource;
+import org.openmrs.module.webservices.rest19ext.web.v1_0.resource.LocationAttributeResource;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 /**
- * Controller for REST web service access to {@link PersonAttribute}. Supports CRUD on the resource
+ * Controller for REST web service access to {@link LocationAttribute}. Supports CRUD on the resource
  * itself.
  */
 @Controller
 @RequestMapping(value = "/rest/" + RestConstants.VERSION_1 + "/location/{parentUuid}/attribute")
-public class LocationAttributeController extends BaseSubResourceController<PersonAttributeResource> {
+public class LocationAttributeController extends BaseSubResourceController<LocationAttributeResource> {
 
 }
