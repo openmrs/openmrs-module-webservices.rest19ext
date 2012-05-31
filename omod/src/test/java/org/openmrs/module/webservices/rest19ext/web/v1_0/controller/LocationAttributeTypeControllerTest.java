@@ -61,7 +61,7 @@ public class LocationAttributeTypeControllerTest extends BaseModuleWebContextSen
 	/**
 	 * @see
 	 * LocationAttributeTypeController#getLocationAttributeType(LocationAttributeType,WebRequest)
-	 * @verifies get a default representation of a person attribute type
+	 * @verifies get a default representation of a location attribute type
 	 */
 	@Test
 	public void getLocationAttributeType_shouldGetADefaultRepresentationOfALocationAttributeType() throws Exception {
@@ -77,7 +77,7 @@ public class LocationAttributeTypeControllerTest extends BaseModuleWebContextSen
 	/**
 	 * @see
 	 * LocationAttributeTypeController#getLocationAttributeType(String,WebRequest)
-	 * @verifies get a full representation of a person attribute type
+	 * @verifies get a full representation of a location attribute type
 	 */
 	@Test
 	public void getLocationAttributeType_shouldGetAFullRepresentationOfALocationAttributeType() throws Exception {
@@ -94,14 +94,14 @@ public class LocationAttributeTypeControllerTest extends BaseModuleWebContextSen
 	/**
 	 * @see
 	 * LocationAttributeTypeController#updateLocationAttributeType(LocationAttributeType,SimpleObject,WebRequest)
-	 * @verifies change a property on a person
+	 * @verifies change a property on a location
 	 */
 	@Test
 	public void updateLocationAttributeType_shouldChangeAPropertyOnALocationAttributeType() throws Exception {
 		SimpleObject post = new ObjectMapper().readValue("{\"description\":\"Updated description\"}", SimpleObject.class);
 		Object editedLocationAttributeType = new LocationAttributeTypeController().update(
 		    Rest19ExtTestConstants.LOCATION_ATTRIBUTE_TYPE_UUID, post, emptyRequest(), new MockHttpServletResponse());
-		Util.log("Edited person", editedLocationAttributeType);
+		Util.log("Edited location", editedLocationAttributeType);
 		Assert
 		        .assertEquals("Updated description", Context.getLocationService().getLocationAttributeType(1)
 		                .getDescription());
@@ -110,7 +110,7 @@ public class LocationAttributeTypeControllerTest extends BaseModuleWebContextSen
 	/**
 	 * @see
 	 * LocationAttributeTypeController#retireLocationAttributeType(LocationAttributeType,String,WebRequest)
-	 * @verifies void a person attribute type
+	 * @verifies void a location attribute type
 	 */
 	@Test
 	public void retireLocationAttributeType_shouldRetireALocationAttributeType() throws Exception {
@@ -126,10 +126,10 @@ public class LocationAttributeTypeControllerTest extends BaseModuleWebContextSen
 	/**
 	 * @see
 	 * LocationAttributeTypeController#findLocationAttributeTypes(String,WebRequest,HttpServletResponse)
-	 * @verifies return no results if there are no matching person(s)
+	 * @verifies return no results if there are no matching location(s)
 	 */
 	@Test
-	public void findLocationAttributeTypes_shouldReturnNoResultsIfThereAreNoMatchingPersons() throws Exception {
+	public void findLocationAttributeTypes_shouldReturnNoResultsIfThereAreNoMatchingLocations() throws Exception {
 		List<Object> results = (List<Object>) new LocationAttributeTypeController().search("zzzznotype", emptyRequest(),
 		    new MockHttpServletResponse()).get("results");
 		Assert.assertEquals(0, results.size());
@@ -138,7 +138,7 @@ public class LocationAttributeTypeControllerTest extends BaseModuleWebContextSen
 	/**
 	 * @see
 	 * LocationAttributeTypeController#findLocationAttributeTypes(String,WebRequest,HttpServletResponse)
-	 * @verifies find matching person attribute types
+	 * @verifies find matching location attribute types
 	 */
 	@Test
 	public void findLocationAttributeTypes_shouldFindMatchingLocationAttributeTypes() throws Exception {

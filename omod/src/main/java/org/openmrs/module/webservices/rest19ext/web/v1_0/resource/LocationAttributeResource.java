@@ -130,7 +130,7 @@ public class LocationAttributeResource extends DelegatingSubResource<LocationAtt
 	 */
 	@Override
 	public LocationAttribute save(LocationAttribute delegate) {
-		// make sure it has not already been added to the person
+		// make sure it has not already been added to the location
 		boolean needToAdd = true;
 		for (LocationAttribute pa : delegate.getLocation().getActiveAttributes()) {
 			if (pa.equals(delegate)) {

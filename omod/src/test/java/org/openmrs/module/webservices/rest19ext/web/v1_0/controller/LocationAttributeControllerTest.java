@@ -85,13 +85,13 @@ public class LocationAttributeControllerTest extends BaseModuleWebContextSensiti
 		SimpleObject post = new ObjectMapper().readValue(json, SimpleObject.class);
 		
 		LocationAttribute locationAttribute = service
-		        .getLocationAttributeByUuid(Rest19ExtTestConstants.LOCATION_ATTRIBUTE_TYPE_UUID);
+		        .getLocationAttributeByUuid(Rest19ExtTestConstants.LOCATION_ATTRIBUTE_UUID);
 		Assert.assertEquals("Audit Date", locationAttribute.getAttributeType().getName());
 		
-		controller.update(Rest19ExtTestConstants.LOCATION_UUID, Rest19ExtTestConstants.LOCATION_ATTRIBUTE_TYPE_UUID, post,
+		controller.update(Rest19ExtTestConstants.LOCATION_UUID, Rest19ExtTestConstants.LOCATION_ATTRIBUTE_UUID, post,
 		    request, response);
 		
-		locationAttribute = service.getLocationAttributeByUuid(Rest19ExtTestConstants.LOCATION_ATTRIBUTE_TYPE_UUID);
+		locationAttribute = service.getLocationAttributeByUuid(Rest19ExtTestConstants.LOCATION_ATTRIBUTE_UUID);
 		Assert.assertEquals("Care Date", locationAttribute.getAttributeType().getName());
 	}
 	
