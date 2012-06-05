@@ -13,6 +13,8 @@
  */
 package org.openmrs.module.webservices.rest19ext.web.v2_0.resource;
 
+import java.util.Arrays;
+import java.util.List;
 import org.openmrs.Location;
 import org.openmrs.annotation.Handler;
 import org.openmrs.module.webservices.rest.web.annotation.Resource;
@@ -56,5 +58,13 @@ public class LocationResource extends org.openmrs.module.webservices.rest.web.v1
 		DelegatingResourceDescription description = super.getCreatableProperties();
 		description.addProperty("attributes");
 		return description;
+	}
+	
+	/**
+	 * @see org.openmrs.module.webservices.rest.web.resource.impl.BaseDelegatingResource#getPropertiesToExposeAsSubResources()
+	 */
+	@Override
+	public List<String> getPropertiesToExposeAsSubResources() {
+		return Arrays.asList("attributes");
 	}
 }

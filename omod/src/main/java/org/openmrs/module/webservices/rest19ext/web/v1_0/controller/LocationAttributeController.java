@@ -25,7 +25,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
  * itself.
  */
 @Controller
-@RequestMapping(value = "/rest/" + RestConstants.VERSION_1 + "/location/{parentUuid}/attribute")
+@RequestMapping(value = "/rest/" + RestConstants.VERSION_2 + "/location/{parentUuid}/attribute")
 public class LocationAttributeController extends BaseSubResourceController<LocationAttributeResource> {
 
 }

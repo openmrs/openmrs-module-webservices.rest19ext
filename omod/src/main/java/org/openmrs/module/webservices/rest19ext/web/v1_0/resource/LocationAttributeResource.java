@@ -47,7 +47,7 @@ public class LocationAttributeResource extends DelegatingSubResource<LocationAtt
 			DelegatingResourceDescription description = new DelegatingResourceDescription();
 			description.addProperty("display", findMethod("getDisplayString"));
 			description.addProperty("uuid");
-			description.addProperty("value");
+			description.addProperty("valueReferenceInternal");
 			description.addProperty("attributeType", Representation.REF);
 			description.addProperty("voided");
 			description.addSelfLink();
@@ -57,7 +57,7 @@ public class LocationAttributeResource extends DelegatingSubResource<LocationAtt
 			DelegatingResourceDescription description = new DelegatingResourceDescription();
 			description.addProperty("display", findMethod("getDisplayString"));
 			description.addProperty("uuid");
-			description.addProperty("value");
+			description.addProperty("valueReferenceInternal");
 			description.addProperty("attributeType", Representation.DEFAULT);
 			description.addProperty("voided");
 			description.addProperty("auditInfo", findMethod("getAuditInfo"));
@@ -70,7 +70,7 @@ public class LocationAttributeResource extends DelegatingSubResource<LocationAtt
 	@Override
 	public DelegatingResourceDescription getCreatableProperties() {
 		DelegatingResourceDescription description = new DelegatingResourceDescription();
-		description.addRequiredProperty("value");
+		description.addRequiredProperty("valueReferenceInternal");
 		description.addRequiredProperty("attributeType");
 		return description;
 	}
