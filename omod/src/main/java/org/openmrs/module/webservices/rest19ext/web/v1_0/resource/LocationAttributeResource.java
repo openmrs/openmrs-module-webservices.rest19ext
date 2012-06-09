@@ -13,13 +13,16 @@
  */
 package org.openmrs.module.webservices.rest19ext.web.v1_0.resource;
 
+import java.lang.reflect.Method;
 import java.util.List;
 import org.openmrs.Location;
 import org.openmrs.LocationAttribute;
+import org.openmrs.LocationAttributeType;
 import org.openmrs.annotation.Handler;
 import org.openmrs.api.context.Context;
 import org.openmrs.module.webservices.rest.web.RequestContext;
 import org.openmrs.module.webservices.rest.web.RestConstants;
+import org.openmrs.module.webservices.rest.web.annotation.PropertySetter;
 import org.openmrs.module.webservices.rest.web.annotation.Resource;
 import org.openmrs.module.webservices.rest.web.annotation.SubResource;
 import org.openmrs.module.webservices.rest.web.representation.DefaultRepresentation;
@@ -39,6 +42,31 @@ import org.openmrs.module.webservices.rest19ext.web.v2_0.resource.LocationResour
 public class LocationAttributeResource extends DelegatingSubResource<LocationAttribute, Location, LocationResource> {
 	
 	/**
+	 * Sets attributes on the given person.
+	 * 
+	 * @param instance
+	 * @param names
+	 */
+	@PropertySetter("attributeType")
+	public static void setAttributeType(LocationAttribute instance, LocationAttributeType attr) {
+		instance.setAttributeType(attr);
+	}
+	
+	/**
+	 * Sets attributes on the given person.
+	 * 
+	 * @param instance
+	 * @param names
+	 */
+	@PropertySetter("value")
+	public static void setValue(LocationAttribute instance, String value) throws Exception {
+		Class clazz = Class.forName(instance.getAttributeType().getDatatypeClassname());
+		Method fromReferenceString = clazz.getMethod("fromReferenceString", String.class);
+		Object val = fromReferenceString.invoke(clazz.newInstance(), value);
+		instance.setValue(val);
+	}
+	
+	/**
 	 * @see org.openmrs.module.webservices.rest.web.resource.impl.BaseDelegatingResource#getRepresentationDescription(org.openmrs.module.webservices.rest.web.representation.Representation)
 	 */
 	@Override
@@ -47,7 +75,7 @@ public class LocationAttributeResource extends DelegatingSubResource<LocationAtt
 			DelegatingResourceDescription description = new DelegatingResourceDescription();
 			description.addProperty("display", findMethod("getDisplayString"));
 			description.addProperty("uuid");
-			description.addProperty("valueReferenceInternal");
+			description.addProperty("value");
 			description.addProperty("attributeType", Representation.REF);
 			description.addProperty("voided");
 			description.addSelfLink();
@@ -57,8 +85,8 @@ public class LocationAttributeResource extends DelegatingSubResource<LocationAtt
 			DelegatingResourceDescription description = new DelegatingResourceDescription();
 			description.addProperty("display", findMethod("getDisplayString"));
 			description.addProperty("uuid");
-			description.addProperty("valueReferenceInternal");
-			description.addProperty("attributeType", Representation.DEFAULT);
+			description.addProperty("value");
+			description.addProperty("attributeType", Representation.REF);
 			description.addProperty("voided");
 			description.addProperty("auditInfo", findMethod("getAuditInfo"));
 			description.addSelfLink();
@@ -70,7 +98,7 @@ public class LocationAttributeResource extends DelegatingSubResource<LocationAtt
 	@Override
 	public DelegatingResourceDescription getCreatableProperties() {
 		DelegatingResourceDescription description = new DelegatingResourceDescription();
-		description.addRequiredProperty("valueReferenceInternal");
+		description.addRequiredProperty("value");
 		description.addRequiredProperty("attributeType");
 		return description;
 	}

@@ -16,7 +16,9 @@ package org.openmrs.module.webservices.rest19ext.web.v2_0.resource;
 import java.util.Arrays;
 import java.util.List;
 import org.openmrs.Location;
+import org.openmrs.LocationAttribute;
 import org.openmrs.annotation.Handler;
+import org.openmrs.module.webservices.rest.web.annotation.PropertySetter;
 import org.openmrs.module.webservices.rest.web.annotation.Resource;
 import org.openmrs.module.webservices.rest.web.representation.DefaultRepresentation;
 import org.openmrs.module.webservices.rest.web.representation.FullRepresentation;
@@ -34,17 +36,30 @@ import org.springframework.stereotype.Component;
 public class LocationResource extends org.openmrs.module.webservices.rest.web.v1_0.resource.LocationResource {
 	
 	/**
+	 * Sets attributes on the given person.
+	 * 
+	 * @param instance
+	 * @param names
+	 */
+	@PropertySetter("attributes")
+	public static void setAttributes(Location instance, List<LocationAttribute> attrs) {
+		for (LocationAttribute attr : attrs) {
+			instance.addAttribute(attr);
+		}
+	}
+	
+	/**
 	 * @see DelegatingCrudResource#getRepresentationDescription(Representation)
 	 */
 	@Override
 	public DelegatingResourceDescription getRepresentationDescription(Representation rep) {
 		if (rep instanceof DefaultRepresentation) {
 			DelegatingResourceDescription description = super.getRepresentationDescription(rep);
-			description.addProperty("attributes", "activeAttributes", Representation.REF);
+			description.addProperty("attributes", Representation.REF);
 			return description;
 		} else if (rep instanceof FullRepresentation) {
 			DelegatingResourceDescription description = super.getRepresentationDescription(rep);
-			description.addProperty("attributes", "activeAttributes", Representation.DEFAULT);
+			description.addProperty("attributes", Representation.DEFAULT);
 			return description;
 		}
 		return null;

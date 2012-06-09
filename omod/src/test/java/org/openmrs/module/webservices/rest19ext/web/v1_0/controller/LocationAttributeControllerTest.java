@@ -20,6 +20,7 @@ import org.codehaus.jackson.map.ObjectMapper;
 import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
+import org.openmrs.Location;
 import org.openmrs.LocationAttribute;
 import org.openmrs.api.LocationService;
 import org.openmrs.api.context.Context;
@@ -66,13 +67,13 @@ public class LocationAttributeControllerTest extends BaseModuleWebContextSensiti
 	public void shouldListAttributesForLocation() throws Exception {
 		SimpleObject result = controller.getAll(Rest19ExtTestConstants.LOCATION_UUID, request, response);
 		Assert.assertNotNull(result);
-		Assert.assertEquals(1, Util.getResultsSize(result));
+		Assert.assertEquals(2, Util.getResultsSize(result));
 	}
 	
 	@Test
 	public void shouldAddAttributeToLocation() throws Exception {
 		int before = service.getLocationByUuid(Rest19ExtTestConstants.LOCATION_UUID).getAttributes().size();
-		String json = "{ \"attributeType\":\"9516cc50-6f9f-132r-6556-001e378eb67f\", \"valueReferenceInternal\":\"Random\"}";
+		String json = "{\"attributeType\":\"9516cc50-6f9f-132r-5433-001e378eb67f\", \"value\":\"2012-05-05\"}";
 		SimpleObject post = new ObjectMapper().readValue(json, SimpleObject.class);
 		controller.create(Rest19ExtTestConstants.LOCATION_UUID, post, request, response);
 		int after = service.getLocationByUuid(Rest19ExtTestConstants.LOCATION_UUID).getAttributes().size();
