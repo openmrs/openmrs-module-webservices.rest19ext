@@ -12,5 +12,13 @@ public class Rest19ExtTestConstants {
 	
 	public final static String PROVIDER_UUID = "c2299800-dgha-11e0-9572-0800200c9a66";
 	
+	public final static String PROVIDER_ATTRIBUTE_TYPE_UUID = "9516cc50-n8ik-bc4f-8414-001e378eb67e";
+	
+	public final static String PROVIDER_ATTRIBUTE_TYPE2_UUID = "9516cc50-bm8q-mibn-8414-001e378eb67e";
+	
+	public final static String PROVIDER_ATTRIBUTE_UUID = "3a2bdb18-6faa-n3g3-6e62-001e378eb67e";
+	
+	public final static String PROVIDER_ATTRIBUTE2_UUID = "3a2bdb18-6aan-kwf3-6e62-001e378eb67e";
+	
 	public final static String TEST_DATASET = "customTestDataset.xml";
 }

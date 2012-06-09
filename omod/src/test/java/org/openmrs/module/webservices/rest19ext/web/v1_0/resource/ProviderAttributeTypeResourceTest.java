@@ -12,13 +12,12 @@
 package org.openmrs.module.webservices.rest19ext.web.v1_0.resource;
 
 import org.junit.Before;
-import org.openmrs.Provider;
-import org.openmrs.api.ProviderService;
+import org.openmrs.ProviderAttributeType;
 import org.openmrs.api.context.Context;
 import org.openmrs.module.webservices.rest.web.resource.impl.BaseDelegatingResourceTest;
 import org.openmrs.module.webservices.rest19ext.test.Rest19ExtTestConstants;
 
-public class ProviderResourceTest extends BaseDelegatingResourceTest<ProviderResource, Provider> {
+public class ProviderAttributeTypeResourceTest extends BaseDelegatingResourceTest<ProviderAttributeTypeResource, ProviderAttributeType> {
 	
 	@Before
 	public void before() throws Exception {
@@ -26,36 +25,44 @@ public class ProviderResourceTest extends BaseDelegatingResourceTest<ProviderRes
 	}
 	
 	@Override
-	public Provider newObject() {
-		return Context.getService(ProviderService.class).getProviderByUuid(getUuidProperty());
+	public ProviderAttributeType newObject() {
+		return Context.getProviderService().getProviderAttributeTypeByUuid(getUuidProperty());
 	}
 	
 	@Override
 	public void validateDefaultRepresentation() throws Exception {
 		super.validateDefaultRepresentation();
-		assertPropPresent("person");
-		assertPropEquals("identifier", getObject().getIdentifier());
-		assertPropPresent("attributes");
+		assertPropEquals("name", getObject().getName());
+		assertPropEquals("description", getObject().getDescription());
+		assertPropEquals("minOccurs", getObject().getMinOccurs());
+		assertPropEquals("maxOccurs", getObject().getMaxOccurs());
+		assertPropEquals("datatypeClassname", getObject().getDatatypeClassname());
+		assertPropEquals("preferredHandlerClassname", getObject().getPreferredHandlerClassname());
 		assertPropEquals("retired", getObject().getRetired());
 	}
 	
 	@Override
 	public void validateFullRepresentation() throws Exception {
 		super.validateFullRepresentation();
-		assertPropPresent("person");
-		assertPropEquals("identifier", getObject().getIdentifier());
-		assertPropPresent("attributes");
+		assertPropEquals("name", getObject().getName());
+		assertPropEquals("description", getObject().getDescription());
+		assertPropEquals("minOccurs", getObject().getMinOccurs());
+		assertPropEquals("maxOccurs", getObject().getMaxOccurs());
+		assertPropEquals("datatypeClassname", getObject().getDatatypeClassname());
+		assertPropEquals("datatypeConfig", getObject().getDatatypeConfig());
+		assertPropEquals("preferredHandlerClassname", getObject().getPreferredHandlerClassname());
+		assertPropEquals("handlerConfig", getObject().getHandlerConfig());
 		assertPropEquals("retired", getObject().getRetired());
 		assertPropPresent("auditInfo");
 	}
 	
 	@Override
 	public String getDisplayProperty() {
-		return "Test2 - Mr. Horatio Test Hornblower Esq.";
+		return "Joining Date - ";
 	}
 	
 	@Override
 	public String getUuidProperty() {
-		return Rest19ExtTestConstants.PROVIDER_UUID;
+		return Rest19ExtTestConstants.PROVIDER_ATTRIBUTE_TYPE_UUID;
 	}
 }

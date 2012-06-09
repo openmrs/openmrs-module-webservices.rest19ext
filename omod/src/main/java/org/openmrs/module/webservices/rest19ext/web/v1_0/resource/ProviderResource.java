@@ -78,7 +78,6 @@ public class ProviderResource extends MetadataDelegatingCrudResource<Provider> {
 		DelegatingResourceDescription description = new DelegatingResourceDescription();
 		description.addRequiredProperty("person");
 		description.addRequiredProperty("identifier");
-		description.addProperty("person");
 		description.addProperty("attributes");
 		description.addProperty("retired");
 		return description;
@@ -181,5 +180,13 @@ public class ProviderResource extends MetadataDelegatingCrudResource<Provider> {
 			return "";
 		}
 		return provider.getIdentifier() + " - " + provider.getName();
+	}
+	
+	/**
+	 * @see org.openmrs.module.webservices.rest.web.resource.impl.BaseDelegatingResource#getResourceVersion()
+	 */
+	@Override
+	public String getResourceVersion() {
+		return "1.9";
 	}
 }

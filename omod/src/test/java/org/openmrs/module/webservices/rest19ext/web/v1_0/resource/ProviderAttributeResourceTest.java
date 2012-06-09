@@ -11,14 +11,15 @@
  */
 package org.openmrs.module.webservices.rest19ext.web.v1_0.resource;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import org.junit.Before;
-import org.openmrs.Provider;
-import org.openmrs.api.ProviderService;
+import org.openmrs.ProviderAttribute;
 import org.openmrs.api.context.Context;
 import org.openmrs.module.webservices.rest.web.resource.impl.BaseDelegatingResourceTest;
 import org.openmrs.module.webservices.rest19ext.test.Rest19ExtTestConstants;
 
-public class ProviderResourceTest extends BaseDelegatingResourceTest<ProviderResource, Provider> {
+public class ProviderAttributeResourceTest extends BaseDelegatingResourceTest<ProviderAttributeResource, ProviderAttribute> {
 	
 	@Before
 	public void before() throws Exception {
@@ -26,36 +27,40 @@ public class ProviderResourceTest extends BaseDelegatingResourceTest<ProviderRes
 	}
 	
 	@Override
-	public Provider newObject() {
-		return Context.getService(ProviderService.class).getProviderByUuid(getUuidProperty());
+	public ProviderAttribute newObject() {
+		return Context.getProviderService().getProviderAttributeByUuid(getUuidProperty());
 	}
 	
 	@Override
 	public void validateDefaultRepresentation() throws Exception {
 		super.validateDefaultRepresentation();
-		assertPropPresent("person");
-		assertPropEquals("identifier", getObject().getIdentifier());
-		assertPropPresent("attributes");
-		assertPropEquals("retired", getObject().getRetired());
+		assertPropEquals("value", getObject().getValue());
+		assertPropPresent("attributeType");
+		assertPropEquals("voided", getObject().getVoided());
 	}
 	
 	@Override
 	public void validateFullRepresentation() throws Exception {
 		super.validateFullRepresentation();
-		assertPropPresent("person");
-		assertPropEquals("identifier", getObject().getIdentifier());
-		assertPropPresent("attributes");
-		assertPropEquals("retired", getObject().getRetired());
+		assertPropEquals("value", getObject().getValue());
+		assertPropPresent("attributeType");
+		assertPropEquals("voided", getObject().getVoided());
 		assertPropPresent("auditInfo");
 	}
 	
 	@Override
 	public String getDisplayProperty() {
-		return "Test2 - Mr. Horatio Test Hornblower Esq.";
+		try {
+			return "Joining Date - " + new SimpleDateFormat("yyyy-MM-dd").parse("2011-04-25");
+		}
+		catch (ParseException ex) {
+			ex.printStackTrace();
+			return null;
+		}
 	}
 	
 	@Override
 	public String getUuidProperty() {
-		return Rest19ExtTestConstants.PROVIDER_UUID;
+		return Rest19ExtTestConstants.PROVIDER_ATTRIBUTE_UUID;
 	}
 }
