@@ -41,10 +41,10 @@ import org.openmrs.module.webservices.rest.web.response.ResponseException;
 public class LocationAttributeResource extends DelegatingSubResource<LocationAttribute, Location, LocationResource> {
 	
 	/**
-	 * Sets attributes on the given person.
+	 * Sets attributeType on the given LocationAttribute.
 	 * 
 	 * @param instance
-	 * @param names
+	 * @param attr
 	 */
 	@PropertySetter("attributeType")
 	public static void setAttributeType(LocationAttribute instance, LocationAttributeType attr) {
@@ -52,10 +52,10 @@ public class LocationAttributeResource extends DelegatingSubResource<LocationAtt
 	}
 	
 	/**
-	 * Sets attributes on the given person.
+	 * Sets value on the given LocationAttribute.
 	 * 
 	 * @param instance
-	 * @param names
+	 * @param value
 	 */
 	@PropertySetter("value")
 	public static void setValue(LocationAttribute instance, String value) throws Exception {
@@ -190,8 +190,6 @@ public class LocationAttributeResource extends DelegatingSubResource<LocationAtt
 	@Override
 	public void purge(LocationAttribute delegate, RequestContext context) throws ResponseException {
 		throw new UnsupportedOperationException("Cannot purge LocationAttribute");
-		//delegate.getLocation().removeAttribute(delegate);
-		//Context.getPersonService().savePerson(delegate.getPerson());
 	}
 	
 	/**

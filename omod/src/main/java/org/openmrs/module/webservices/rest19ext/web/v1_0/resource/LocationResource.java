@@ -36,10 +36,10 @@ import org.springframework.stereotype.Component;
 public class LocationResource extends org.openmrs.module.webservices.rest.web.v1_0.resource.LocationResource {
 	
 	/**
-	 * Sets attributes on the given person.
+	 * Sets attributes on the given Location.
 	 * 
 	 * @param instance
-	 * @param names
+	 * @param attrs
 	 */
 	@PropertySetter("attributes")
 	public static void setAttributes(Location instance, List<LocationAttribute> attrs) {
