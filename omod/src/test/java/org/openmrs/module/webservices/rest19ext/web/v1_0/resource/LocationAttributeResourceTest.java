@@ -11,13 +11,15 @@
  */
 package org.openmrs.module.webservices.rest19ext.web.v1_0.resource;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import org.junit.Before;
-import org.openmrs.LocationAttributeType;
+import org.openmrs.LocationAttribute;
 import org.openmrs.api.context.Context;
 import org.openmrs.module.webservices.rest.web.resource.impl.BaseDelegatingResourceTest;
 import org.openmrs.module.webservices.rest19ext.test.Rest19ExtTestConstants;
 
-public class LocationAttributeResourceTest extends BaseDelegatingResourceTest<LocationAttributeTypeResource, LocationAttributeType> {
+public class LocationAttributeResourceTest extends BaseDelegatingResourceTest<LocationAttributeResource, LocationAttribute> {
 	
 	@Before
 	public void before() throws Exception {
@@ -25,44 +27,40 @@ public class LocationAttributeResourceTest extends BaseDelegatingResourceTest<Lo
 	}
 	
 	@Override
-	public LocationAttributeType newObject() {
-		return Context.getLocationService().getLocationAttributeTypeByUuid(getUuidProperty());
+	public LocationAttribute newObject() {
+		return Context.getLocationService().getLocationAttributeByUuid(getUuidProperty());
 	}
 	
 	@Override
 	public void validateDefaultRepresentation() throws Exception {
 		super.validateDefaultRepresentation();
-		assertPropEquals("name", getObject().getName());
-		assertPropEquals("description", getObject().getDescription());
-		assertPropEquals("minOccurs", getObject().getMinOccurs());
-		assertPropEquals("maxOccurs", getObject().getMaxOccurs());
-		assertPropEquals("datatypeClassname", getObject().getDatatypeClassname());
-		assertPropEquals("preferredHandlerClassname", getObject().getPreferredHandlerClassname());
-		assertPropEquals("retired", getObject().getRetired());
+		assertPropEquals("value", getObject().getValue());
+		assertPropPresent("attributeType");
+		assertPropEquals("voided", getObject().getVoided());
 	}
 	
 	@Override
 	public void validateFullRepresentation() throws Exception {
 		super.validateFullRepresentation();
-		assertPropEquals("name", getObject().getName());
-		assertPropEquals("description", getObject().getDescription());
-		assertPropEquals("minOccurs", getObject().getMinOccurs());
-		assertPropEquals("maxOccurs", getObject().getMaxOccurs());
-		assertPropEquals("datatypeClassname", getObject().getDatatypeClassname());
-		assertPropEquals("datatypeConfig", getObject().getDatatypeConfig());
-		assertPropEquals("preferredHandlerClassname", getObject().getPreferredHandlerClassname());
-		assertPropEquals("handlerConfig", getObject().getHandlerConfig());
-		assertPropEquals("retired", getObject().getRetired());
+		assertPropEquals("value", getObject().getValue());
+		assertPropPresent("attributeType");
+		assertPropEquals("voided", getObject().getVoided());
 		assertPropPresent("auditInfo");
 	}
 	
 	@Override
 	public String getDisplayProperty() {
-		return "Audit Date - ";
+		try {
+			return "Audit Date - " + new SimpleDateFormat("yyyy-MM-dd").parse("2011-04-25");
+		}
+		catch (ParseException ex) {
+			ex.printStackTrace();
+			return null;
+		}
 	}
 	
 	@Override
 	public String getUuidProperty() {
-		return Rest19ExtTestConstants.LOCATION_ATTRIBUTE_TYPE_UUID;
+		return Rest19ExtTestConstants.LOCATION_ATTRIBUTE_UUID;
 	}
 }
