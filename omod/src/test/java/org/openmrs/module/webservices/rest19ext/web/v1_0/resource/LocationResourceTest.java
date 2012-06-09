@@ -11,8 +11,9 @@
  *
  * Copyright (C) OpenMRS, LLC.  All Rights Reserved.
  */
-package org.openmrs.module.webservices.rest19ext.web.v2_0.resource;
+package org.openmrs.module.webservices.rest19ext.web.v1_0.resource;
 
+import org.openmrs.module.webservices.rest19ext.web.v1_0.resource.LocationResource;
 import org.junit.Before;
 import org.openmrs.Location;
 import org.openmrs.api.context.Context;

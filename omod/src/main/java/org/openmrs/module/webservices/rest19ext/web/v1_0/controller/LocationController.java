@@ -9,12 +9,11 @@
  *
  * Copyright (C) OpenMRS, LLC. All Rights Reserved.
  */
-package org.openmrs.module.webservices.rest19ext.web.v2_0.controller;
+package org.openmrs.module.webservices.rest19ext.web.v1_0.controller;
 
 import org.openmrs.module.webservices.rest.web.RestConstants;
 import org.openmrs.module.webservices.rest.web.v1_0.controller.BaseCrudController;
-import org.openmrs.module.webservices.rest19ext.web.v2_0.resource.LocationResource;
-import org.springframework.context.annotation.Bean;
+import org.openmrs.module.webservices.rest19ext.web.v1_0.resource.LocationResource;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -22,6 +21,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
  * Controller for REST web service access to the Location. Supports CRUD on the
  * resource itself.
  */
-@Controller("org.openmrs.module.webservices.rest19ext.web.v2_0.controller.LocationController")
+@Controller("org.openmrs.module.webservices.rest19ext.web.v1_0.controller.LocationController")
 @RequestMapping(value = "/rest/" + RestConstants.VERSION_2 + "/location")
 public class LocationController extends BaseCrudController<LocationResource> {}

@@ -173,4 +173,12 @@ public class LocationAttributeTypeResource extends MetadataDelegatingCrudResourc
 		}
 		return new NeedsPaging<LocationAttributeType>(queryResult, context);
 	}
+	
+	/**
+	 * @see org.openmrs.module.webservices.rest.web.resource.impl.BaseDelegatingResource#getResourceVersion()
+	 */
+	@Override
+	public String getResourceVersion() {
+		return "1.9";
+	}
 }

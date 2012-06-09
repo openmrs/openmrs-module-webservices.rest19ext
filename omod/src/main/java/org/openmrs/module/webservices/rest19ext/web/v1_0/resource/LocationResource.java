@@ -11,7 +11,7 @@
  *
  * Copyright (C) OpenMRS, LLC.  All Rights Reserved.
  */
-package org.openmrs.module.webservices.rest19ext.web.v2_0.resource;
+package org.openmrs.module.webservices.rest19ext.web.v1_0.resource;
 
 import java.util.Arrays;
 import java.util.List;
@@ -82,4 +82,13 @@ public class LocationResource extends org.openmrs.module.webservices.rest.web.v1
 	public List<String> getPropertiesToExposeAsSubResources() {
 		return Arrays.asList("attributes");
 	}
+	
+	/**
+	 * @see org.openmrs.module.webservices.rest.web.resource.impl.BaseDelegatingResource#getResourceVersion()
+	 */
+	@Override
+	public String getResourceVersion() {
+		return "1.9";
+	}
+	
 }

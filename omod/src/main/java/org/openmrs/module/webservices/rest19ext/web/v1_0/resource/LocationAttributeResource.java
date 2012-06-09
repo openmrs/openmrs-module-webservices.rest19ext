@@ -32,7 +32,6 @@ import org.openmrs.module.webservices.rest.web.resource.impl.DelegatingResourceD
 import org.openmrs.module.webservices.rest.web.resource.impl.DelegatingSubResource;
 import org.openmrs.module.webservices.rest.web.resource.impl.NeedsPaging;
 import org.openmrs.module.webservices.rest.web.response.ResponseException;
-import org.openmrs.module.webservices.rest19ext.web.v2_0.resource.LocationResource;
 
 /**
  * {@link Resource} for LocationAttributes, supporting standard CRUD operations
@@ -205,5 +204,13 @@ public class LocationAttributeResource extends DelegatingSubResource<LocationAtt
 		if (la.getAttributeType() == null)
 			return "";
 		return la.getAttributeType().getName() + " - " + la.getValue();
+	}
+	
+	/**
+	 * @see org.openmrs.module.webservices.rest.web.resource.impl.BaseDelegatingResource#getResourceVersion()
+	 */
+	@Override
+	public String getResourceVersion() {
+		return "1.9";
 	}
 }
