@@ -11,6 +11,8 @@
  */
 package org.openmrs.module.webservices.rest19ext.web.v1_0.controller;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import javax.servlet.http.HttpServletResponse;
 
 import junit.framework.Assert;
@@ -56,9 +58,10 @@ public class ProviderAttributeControllerTest extends BaseModuleWebContextSensiti
 	public void shouldGetAProviderAttribute() throws Exception {
 		Object result = controller.retrieve(Rest19ExtTestConstants.PROVIDER_UUID,
 		    Rest19ExtTestConstants.PROVIDER_ATTRIBUTE_UUID, request);
+		String rfc822Timezone = new SimpleDateFormat("Z").format(new Date());
 		Assert.assertNotNull(result);
 		Assert.assertEquals(Rest19ExtTestConstants.PROVIDER_ATTRIBUTE_UUID, PropertyUtils.getProperty(result, "uuid"));
-		Assert.assertEquals("2011-04-25T00:00:00.000+0530", PropertyUtils.getProperty(result, "value"));
+		Assert.assertEquals("2011-04-25T00:00:00.000" + rfc822Timezone, PropertyUtils.getProperty(result, "value"));
 		Assert.assertNull(PropertyUtils.getProperty(result, "auditInfo"));
 	}
 	
