@@ -127,6 +127,17 @@ public class VisitTypeControllerTest extends BaseModuleWebContextSensitiveTest {
 		
 	}
 	
+	@SuppressWarnings("unchecked")
+	@Test
+	public void shouldSearchAndReturnAListOfVisitTypesMatchingTheQueryStringExcludingRetiredOnes() throws Exception {
+		final String searchString = "Hos";
+		//sanity check
+		Assert.assertEquals(1, Context.getVisitService().getVisitTypes(searchString).size());
+		List<Object> hits = (List<Object>) controller.search(searchString, request, response).get("results");
+		Assert.assertEquals(0, hits.size());
+		
+	}
+	
 	@Test
 	public void shouldReturnTheAuditInfoForTheFullRepresentation() throws Exception {
 		request.addParameter(RestConstants.REQUEST_PROPERTY_FOR_REPRESENTATION, RestConstants.REPRESENTATION_FULL);

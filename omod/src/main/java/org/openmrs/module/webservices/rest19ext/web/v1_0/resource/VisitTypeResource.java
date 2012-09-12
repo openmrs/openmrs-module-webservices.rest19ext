@@ -51,7 +51,7 @@ public class VisitTypeResource extends MetadataDelegatingCrudResource<VisitType>
 		DelegatingResourceDescription description = new DelegatingResourceDescription();
 		
 		description.addRequiredProperty("name");
-		description.addRequiredProperty("description");
+		description.addProperty("description");
 		
 		return description;
 	}
@@ -125,7 +125,13 @@ public class VisitTypeResource extends MetadataDelegatingCrudResource<VisitType>
 	 */
 	@Override
 	protected NeedsPaging<VisitType> doSearch(String query, RequestContext context) {
-		return new NeedsPaging<VisitType>(Context.getVisitService().getVisitTypes(query), context);
+		List<VisitType> visitTypes = Context.getVisitService().getVisitTypes(query);
+		List<VisitType> unRetiredVisitTypes = new ArrayList<VisitType>();
+		for (VisitType visitType : visitTypes) {
+			if (!visitType.isRetired())
+				unRetiredVisitTypes.add(visitType);
+		}
+		return new NeedsPaging<VisitType>(unRetiredVisitTypes, context);
 	}
 	
 	/**
