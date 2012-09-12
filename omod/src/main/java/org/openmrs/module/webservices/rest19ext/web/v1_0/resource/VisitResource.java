@@ -182,8 +182,8 @@ public class VisitResource extends DataDelegatingCrudResource<Visit> {
 	 * @throws ResponseException
 	 */
 	public SimpleObject getVisitsByPatient(String patientUniqueId, RequestContext context) throws ResponseException {
-		Patient patient = Context.getService(RestService.class).getResource(PatientResource.class)
-		        .getByUniqueId(patientUniqueId);
+		Patient patient = Context.getService(RestService.class).getResource(PatientResource.class).getByUniqueId(
+		    patientUniqueId);
 		if (patient == null)
 			throw new ObjectNotFoundException();
 		return new NeedsPaging<Visit>(Context.getVisitService().getVisitsByPatient(patient, true, false), context)

@@ -52,7 +52,7 @@ public class VisitController extends BaseCrudController<VisitResource> {
 	@WSDoc("Fetch all non-voided visits for a patient with the given uuid")
 	@ResponseBody
 	public SimpleObject searchByPatient(@RequestParam("patient") String patientUniqueId, HttpServletRequest request,
-	                                    HttpServletResponse response) throws ResponseException {
+	        HttpServletResponse response) throws ResponseException {
 		RequestContext context = RestUtil.getRequestContext(request);
 		return getResource().getVisitsByPatient(patientUniqueId, context);
 	}

@@ -200,9 +200,7 @@ public class VisitControllerTest extends BaseModuleWebContextSensitiveTest {
 	@Test
 	@Verifies(value = "should get visits for the patient", method = "searchByPatient(String,HttpServletRequest,HttpServletResponse)")
 	public void searchByPatient_shouldGetUnretiredVisitsForThePatient() throws Exception {
-		Assert.assertEquals(
-		    3,
-		    ((List<Object>) controller.searchByPatient("da7f524f-27ce-4bb2-86d6-6d1d05312bd5", request, response).get(
-		        "results")).size());
+		Assert.assertEquals(3, ((List<Object>) controller.searchByPatient("da7f524f-27ce-4bb2-86d6-6d1d05312bd5", request,
+		    response).get("results")).size());
 	}
 }
