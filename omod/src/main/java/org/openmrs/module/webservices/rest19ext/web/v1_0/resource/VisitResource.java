@@ -55,7 +55,7 @@ public class VisitResource extends DataDelegatingCrudResource<Visit> {
 			description.addProperty("location", Representation.REF);
 			description.addProperty("startDatetime");
 			description.addProperty("stopDatetime");
-			description.addProperty("encounters");
+			description.addProperty("encounters", Representation.REF);
 			description.addProperty("attributes", "activeAttributes", Representation.REF);
 			description.addProperty("voided");
 			description.addSelfLink();
@@ -71,7 +71,7 @@ public class VisitResource extends DataDelegatingCrudResource<Visit> {
 			description.addProperty("location", Representation.REF);
 			description.addProperty("startDatetime");
 			description.addProperty("stopDatetime");
-			description.addProperty("encounters");
+			description.addProperty("encounters", Representation.DEFAULT);
 			description.addProperty("attributes", "activeAttributes", Representation.DEFAULT);
 			description.addProperty("voided");
 			description.addProperty("auditInfo", findMethod("getAuditInfo"));
