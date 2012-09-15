@@ -13,6 +13,9 @@
  */
 package org.openmrs.module.webservices.rest19ext.web.v1_0.resource;
 
+import java.util.Arrays;
+import java.util.List;
+
 import org.apache.commons.lang.StringUtils;
 import org.openmrs.attribute.Attribute;
 import org.openmrs.customdatatype.CustomDatatype;
@@ -104,5 +107,13 @@ public abstract class BaseAttributeCrudResource<T extends Attribute<?, ?>, P, PR
 	@Override
 	public String getResourceVersion() {
 		return "1.9";
+	}
+	
+	/**
+	 * @see org.openmrs.module.webservices.rest.web.resource.impl.BaseDelegatingResource#getPropertiesToExposeAsSubResources()
+	 */
+	@Override
+	public List<String> getPropertiesToExposeAsSubResources() {
+		return Arrays.asList("attributes");
 	}
 }
