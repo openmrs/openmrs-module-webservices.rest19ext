@@ -31,6 +31,7 @@ import org.openmrs.Visit;
 import org.openmrs.api.VisitService;
 import org.openmrs.api.context.Context;
 import org.openmrs.module.webservices.rest.SimpleObject;
+import org.openmrs.module.webservices.rest.test.Util;
 import org.openmrs.module.webservices.rest.web.RestConstants;
 import org.openmrs.module.webservices.rest19ext.test.Rest19ExtTestConstants;
 import org.openmrs.test.Verifies;
@@ -68,8 +69,10 @@ public class VisitControllerTest extends BaseModuleWebContextSensitiveTest {
 		Assert.assertNotNull(PropertyUtils.getProperty(result, "location"));
 		Assert.assertNotNull(PropertyUtils.getProperty(result, "indication"));
 		Assert.assertNotNull(PropertyUtils.getProperty(result, "startDatetime"));
+		Assert.assertNotNull(PropertyUtils.getProperty(result, "attributes"));
 		Assert.assertNull(PropertyUtils.getProperty(result, "stopDatetime"));
 		Assert.assertNull(PropertyUtils.getProperty(result, "auditinfo"));
+		Util.log("VISIT:", result);
 	}
 	
 	@Test
@@ -200,7 +203,9 @@ public class VisitControllerTest extends BaseModuleWebContextSensitiveTest {
 	@Test
 	@Verifies(value = "should get visits for the patient", method = "searchByPatient(String,HttpServletRequest,HttpServletResponse)")
 	public void searchByPatient_shouldGetUnretiredVisitsForThePatient() throws Exception {
-		Assert.assertEquals(3, ((List<Object>) controller.searchByPatient("da7f524f-27ce-4bb2-86d6-6d1d05312bd5", request,
-		    response).get("results")).size());
+		Assert.assertEquals(
+		    3,
+		    ((List<Object>) controller.searchByPatient("da7f524f-27ce-4bb2-86d6-6d1d05312bd5", request, response).get(
+		        "results")).size());
 	}
 }

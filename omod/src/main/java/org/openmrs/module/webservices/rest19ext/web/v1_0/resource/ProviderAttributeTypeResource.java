@@ -14,18 +14,13 @@ package org.openmrs.module.webservices.rest19ext.web.v1_0.resource;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Pattern;
+
 import org.openmrs.ProviderAttributeType;
 import org.openmrs.annotation.Handler;
 import org.openmrs.api.ProviderService;
 import org.openmrs.api.context.Context;
 import org.openmrs.module.webservices.rest.web.RequestContext;
-import org.openmrs.module.webservices.rest.web.RestConstants;
 import org.openmrs.module.webservices.rest.web.annotation.Resource;
-import org.openmrs.module.webservices.rest.web.representation.DefaultRepresentation;
-import org.openmrs.module.webservices.rest.web.representation.FullRepresentation;
-import org.openmrs.module.webservices.rest.web.representation.Representation;
-import org.openmrs.module.webservices.rest.web.resource.impl.DelegatingResourceDescription;
-import org.openmrs.module.webservices.rest.web.resource.impl.MetadataDelegatingCrudResource;
 import org.openmrs.module.webservices.rest.web.resource.impl.NeedsPaging;
 import org.openmrs.module.webservices.rest.web.response.ResponseException;
 
@@ -34,7 +29,7 @@ import org.openmrs.module.webservices.rest.web.response.ResponseException;
  */
 @Resource("providerattributetype")
 @Handler(supports = ProviderAttributeType.class, order = 0)
-public class ProviderAttributeTypeResource extends MetadataDelegatingCrudResource<ProviderAttributeType> {
+public class ProviderAttributeTypeResource extends BaseAttributeTypeCrudResource<ProviderAttributeType> {
 	
 	public ProviderAttributeTypeResource() {
 	}
@@ -44,75 +39,7 @@ public class ProviderAttributeTypeResource extends MetadataDelegatingCrudResourc
 	}
 	
 	/**
-	 * @see
-	 * org.openmrs.module.webservices.rest.web.resource.impl.BaseDelegatingResource#getRepresentationDescription(org.openmrs.module.webservices.rest.web.representation.Representation)
-	 */
-	@Override
-	public DelegatingResourceDescription getRepresentationDescription(Representation rep) {
-		if (rep instanceof DefaultRepresentation) {
-			DelegatingResourceDescription description = new DelegatingResourceDescription();
-			description.addProperty("uuid");
-			description.addProperty("display", findMethod("getDisplayString"));
-			description.addProperty("name");
-			description.addProperty("description");
-			description.addProperty("minOccurs");
-			description.addProperty("maxOccurs");
-			description.addProperty("datatypeClassname");
-			description.addProperty("preferredHandlerClassname");
-			description.addProperty("retired");
-			description.addSelfLink();
-			description.addLink("full", ".?v=" + RestConstants.REPRESENTATION_FULL);
-			return description;
-		} else if (rep instanceof FullRepresentation) {
-			DelegatingResourceDescription description = new DelegatingResourceDescription();
-			description.addProperty("uuid");
-			description.addProperty("display", findMethod("getDisplayString"));
-			description.addProperty("name");
-			description.addProperty("description");
-			description.addProperty("minOccurs");
-			description.addProperty("maxOccurs");
-			description.addProperty("datatypeClassname");
-			description.addProperty("datatypeConfig");
-			description.addProperty("preferredHandlerClassname");
-			description.addProperty("handlerConfig");
-			description.addProperty("retired");
-			description.addProperty("auditInfo", findMethod("getAuditInfo"));
-			description.addSelfLink();
-			return description;
-		}
-		return null;
-	}
-	
-	/**
-	 * @see
-	 * org.openmrs.module.webservices.rest.web.resource.impl.BaseDelegatingResource#getCreatableProperties()
-	 */
-	@Override
-	public DelegatingResourceDescription getCreatableProperties() {
-		DelegatingResourceDescription description = new DelegatingResourceDescription();
-		description.addRequiredProperty("name");
-		description.addRequiredProperty("datatypeClassname");
-		description.addProperty("description");
-		description.addProperty("minOccurs");
-		description.addProperty("maxOccurs");
-		description.addProperty("datatypeConfig");
-		description.addProperty("preferredHandlerClassname");
-		description.addProperty("handlerConfig");
-		return description;
-	}
-	
-	/**
-	 * @see
-	 * org.openmrs.module.webservices.rest.web.resource.impl.BaseDelegatingResource#getUpdatableProperties()
-	 */
-	@Override
-	public DelegatingResourceDescription getUpdatableProperties() {
-		return getCreatableProperties();
-	}
-	
-	/**
-	 * @see
-	 * org.openmrs.module.webservices.rest.web.resource.impl.BaseDelegatingResource#getByUniqueId(java.lang.String)
+	 * @see org.openmrs.module.webservices.rest.web.resource.impl.BaseDelegatingResource#getByUniqueId(java.lang.String)
 	 */
 	@Override
 	public ProviderAttributeType getByUniqueId(String uniqueId) {
@@ -120,8 +47,7 @@ public class ProviderAttributeTypeResource extends MetadataDelegatingCrudResourc
 	}
 	
 	/**
-	 * @see
-	 * org.openmrs.module.webservices.rest.web.resource.impl.DelegatingCrudResource#doGetAll(org.openmrs.module.webservices.rest.web.RequestContext)
+	 * @see org.openmrs.module.webservices.rest.web.resource.impl.DelegatingCrudResource#doGetAll(org.openmrs.module.webservices.rest.web.RequestContext)
 	 */
 	@Override
 	protected NeedsPaging<ProviderAttributeType> doGetAll(RequestContext context) throws ResponseException {
@@ -129,8 +55,7 @@ public class ProviderAttributeTypeResource extends MetadataDelegatingCrudResourc
 	}
 	
 	/**
-	 * @see
-	 * org.openmrs.module.webservices.rest.web.resource.impl.BaseDelegatingResource#newDelegate()
+	 * @see org.openmrs.module.webservices.rest.web.resource.impl.BaseDelegatingResource#newDelegate()
 	 */
 	@Override
 	public ProviderAttributeType newDelegate() {
@@ -138,8 +63,7 @@ public class ProviderAttributeTypeResource extends MetadataDelegatingCrudResourc
 	}
 	
 	/**
-	 * @see
-	 * org.openmrs.module.webservices.rest.web.resource.impl.DelegatingResourceHandler#save(java.lang.Object)
+	 * @see org.openmrs.module.webservices.rest.web.resource.impl.DelegatingResourceHandler#save(java.lang.Object)
 	 */
 	@Override
 	public ProviderAttributeType save(ProviderAttributeType delegate) {
@@ -147,9 +71,8 @@ public class ProviderAttributeTypeResource extends MetadataDelegatingCrudResourc
 	}
 	
 	/**
-	 * @see
-	 * org.openmrs.module.webservices.rest.web.resource.impl.BaseDelegatingResource#purge(java.lang.Object,
-	 * org.openmrs.module.webservices.rest.web.RequestContext)
+	 * @see org.openmrs.module.webservices.rest.web.resource.impl.BaseDelegatingResource#purge(java.lang.Object,
+	 *      org.openmrs.module.webservices.rest.web.RequestContext)
 	 */
 	@Override
 	public void purge(ProviderAttributeType delegate, RequestContext context) throws ResponseException {
@@ -157,9 +80,8 @@ public class ProviderAttributeTypeResource extends MetadataDelegatingCrudResourc
 	}
 	
 	/**
-	 * @see
-	 * org.openmrs.module.webservices.rest.web.resource.impl.DelegatingCrudResource#doSearch(java.lang.String,
-	 * org.openmrs.module.webservices.rest.web.RequestContext)
+	 * @see org.openmrs.module.webservices.rest.web.resource.impl.DelegatingCrudResource#doSearch(java.lang.String,
+	 *      org.openmrs.module.webservices.rest.web.RequestContext)
 	 */
 	@Override
 	protected NeedsPaging<ProviderAttributeType> doSearch(String query, RequestContext context) {
@@ -172,14 +94,5 @@ public class ProviderAttributeTypeResource extends MetadataDelegatingCrudResourc
 			}
 		}
 		return new NeedsPaging<ProviderAttributeType>(queryResult, context);
-	}
-	
-	/**
-	 * @see
-	 * org.openmrs.module.webservices.rest.web.resource.impl.BaseDelegatingResource#getResourceVersion()
-	 */
-	@Override
-	public String getResourceVersion() {
-		return "1.9";
 	}
 }

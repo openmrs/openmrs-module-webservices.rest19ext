@@ -13,11 +13,12 @@
  */
 package org.openmrs.module.webservices.rest19ext.web.v1_0.resource;
 
+import java.util.ArrayList;
 import java.util.List;
 
-import org.openmrs.Location;
-import org.openmrs.LocationAttribute;
-import org.openmrs.LocationAttributeType;
+import org.openmrs.Visit;
+import org.openmrs.VisitAttribute;
+import org.openmrs.VisitAttributeType;
 import org.openmrs.annotation.Handler;
 import org.openmrs.api.context.Context;
 import org.openmrs.module.webservices.rest.web.RequestContext;
@@ -28,20 +29,20 @@ import org.openmrs.module.webservices.rest.web.resource.impl.NeedsPaging;
 import org.openmrs.module.webservices.rest.web.response.ResponseException;
 
 /**
- * {@link Resource} for LocationAttributes, supporting standard CRUD operations
+ * {@link Resource} for VisitAttributes, supporting standard CRUD operations
  */
-@SubResource(parent = LocationResource.class, path = "attribute")
-@Handler(supports = LocationAttribute.class, order = 0)
-public class LocationAttributeResource extends BaseAttributeCrudResource<LocationAttribute, Location, LocationResource> {
+@SubResource(parent = VisitResource.class, path = "attribute")
+@Handler(supports = VisitAttribute.class, order = 0)
+public class VisitAttributeResource extends BaseAttributeCrudResource<VisitAttribute, Visit, VisitResource> {
 	
 	/**
-	 * Sets attributeType on the given LocationAttribute.
+	 * Sets attributes on the given visit.
 	 * 
 	 * @param instance
 	 * @param attr
 	 */
 	@PropertySetter("attributeType")
-	public static void setAttributeType(LocationAttribute instance, LocationAttributeType attr) {
+	public static void setAttributeType(VisitAttribute instance, VisitAttributeType attr) {
 		instance.setAttributeType(attr);
 	}
 	
@@ -49,16 +50,16 @@ public class LocationAttributeResource extends BaseAttributeCrudResource<Locatio
 	 * @see org.openmrs.module.webservices.rest.web.resource.impl.DelegatingSubResource#getParent(java.lang.Object)
 	 */
 	@Override
-	public Location getParent(LocationAttribute instance) {
-		return instance.getLocation();
+	public Visit getParent(VisitAttribute instance) {
+		return instance.getVisit();
 	}
 	
 	/**
 	 * @see org.openmrs.module.webservices.rest.web.resource.impl.BaseDelegatingResource#newDelegate()
 	 */
 	@Override
-	public LocationAttribute newDelegate() {
-		return new LocationAttribute();
+	public VisitAttribute newDelegate() {
+		return new VisitAttribute();
 	}
 	
 	/**
@@ -66,16 +67,16 @@ public class LocationAttributeResource extends BaseAttributeCrudResource<Locatio
 	 *      java.lang.Object)
 	 */
 	@Override
-	public void setParent(LocationAttribute instance, Location location) {
-		instance.setLocation(location);
+	public void setParent(VisitAttribute instance, Visit visit) {
+		instance.setVisit(visit);
 	}
 	
 	/**
 	 * @see org.openmrs.module.webservices.rest.web.resource.impl.BaseDelegatingResource#getByUniqueId(java.lang.String)
 	 */
 	@Override
-	public LocationAttribute getByUniqueId(String uniqueId) {
-		return Context.getLocationService().getLocationAttributeByUuid(uniqueId);
+	public VisitAttribute getByUniqueId(String uniqueId) {
+		return Context.getVisitService().getVisitAttributeByUuid(uniqueId);
 	}
 	
 	/**
@@ -83,27 +84,34 @@ public class LocationAttributeResource extends BaseAttributeCrudResource<Locatio
 	 *      org.openmrs.module.webservices.rest.web.RequestContext)
 	 */
 	@Override
-	public NeedsPaging<LocationAttribute> doGetAll(Location parent, RequestContext context) throws ResponseException {
-		return new NeedsPaging<LocationAttribute>((List<LocationAttribute>) parent.getActiveAttributes(), context);
+	public NeedsPaging<VisitAttribute> doGetAll(Visit parent, RequestContext context) throws ResponseException {
+		if (context.getIncludeAll()) {
+			List<VisitAttribute> attrs = new ArrayList<VisitAttribute>();
+			for (VisitAttribute visitAttribute : parent.getAttributes()) {
+				attrs.add(visitAttribute);
+			}
+			return new NeedsPaging<VisitAttribute>(attrs, context);
+		}
+		return new NeedsPaging<VisitAttribute>((List<VisitAttribute>) parent.getActiveAttributes(), context);
 	}
 	
 	/**
 	 * @see org.openmrs.module.webservices.rest.web.resource.impl.DelegatingResourceHandler#save(java.lang.Object)
 	 */
 	@Override
-	public LocationAttribute save(LocationAttribute delegate) {
-		// make sure it has not already been added to the location
+	public VisitAttribute save(VisitAttribute delegate) {
+		// make sure it has not already been added to the visit
 		boolean needToAdd = true;
-		for (LocationAttribute pa : delegate.getLocation().getActiveAttributes()) {
+		for (VisitAttribute pa : delegate.getVisit().getActiveAttributes()) {
 			if (pa.equals(delegate)) {
 				needToAdd = false;
 				break;
 			}
 		}
 		if (needToAdd) {
-			delegate.getLocation().addAttribute(delegate);
+			delegate.getVisit().addAttribute(delegate);
 		}
-		Context.getLocationService().saveLocation(delegate.getLocation());
+		Context.getVisitService().saveVisit(delegate.getVisit());
 		return delegate;
 	}
 	
@@ -112,10 +120,10 @@ public class LocationAttributeResource extends BaseAttributeCrudResource<Locatio
 	 *      java.lang.String, org.openmrs.module.webservices.rest.web.RequestContext)
 	 */
 	@Override
-	protected void delete(LocationAttribute delegate, String reason, RequestContext context) throws ResponseException {
+	protected void delete(VisitAttribute delegate, String reason, RequestContext context) throws ResponseException {
 		delegate.setVoided(true);
 		delegate.setVoidReason(reason);
-		Context.getLocationService().saveLocation(delegate.getLocation());
+		Context.getVisitService().saveVisit(delegate.getVisit());
 	}
 	
 	/**
@@ -123,7 +131,7 @@ public class LocationAttributeResource extends BaseAttributeCrudResource<Locatio
 	 *      org.openmrs.module.webservices.rest.web.RequestContext)
 	 */
 	@Override
-	public void purge(LocationAttribute delegate, RequestContext context) throws ResponseException {
-		throw new UnsupportedOperationException("Cannot purge LocationAttribute");
+	public void purge(VisitAttribute delegate, RequestContext context) throws ResponseException {
+		throw new UnsupportedOperationException("Cannot purge VisitAttribute");
 	}
 }

@@ -56,6 +56,7 @@ public class VisitResource extends DataDelegatingCrudResource<Visit> {
 			description.addProperty("startDatetime");
 			description.addProperty("stopDatetime");
 			description.addProperty("encounters");
+			description.addProperty("attributes", "activeAttributes", Representation.REF);
 			description.addProperty("voided");
 			description.addSelfLink();
 			description.addLink("full", ".?v=" + RestConstants.REPRESENTATION_FULL);
@@ -71,6 +72,7 @@ public class VisitResource extends DataDelegatingCrudResource<Visit> {
 			description.addProperty("startDatetime");
 			description.addProperty("stopDatetime");
 			description.addProperty("encounters");
+			description.addProperty("attributes", "activeAttributes", Representation.DEFAULT);
 			description.addProperty("voided");
 			description.addProperty("auditInfo", findMethod("getAuditInfo"));
 			description.addSelfLink();
@@ -108,6 +110,7 @@ public class VisitResource extends DataDelegatingCrudResource<Visit> {
 		description.addProperty("indication");
 		description.addProperty("stopDatetime");
 		description.addProperty("encounters");
+		description.addProperty("attributes");
 		
 		return description;
 	}
@@ -182,8 +185,8 @@ public class VisitResource extends DataDelegatingCrudResource<Visit> {
 	 * @throws ResponseException
 	 */
 	public SimpleObject getVisitsByPatient(String patientUniqueId, RequestContext context) throws ResponseException {
-		Patient patient = Context.getService(RestService.class).getResource(PatientResource.class).getByUniqueId(
-		    patientUniqueId);
+		Patient patient = Context.getService(RestService.class).getResource(PatientResource.class)
+		        .getByUniqueId(patientUniqueId);
 		if (patient == null)
 			throw new ObjectNotFoundException();
 		return new NeedsPaging<Visit>(Context.getVisitService().getVisitsByPatient(patient, true, false), context)

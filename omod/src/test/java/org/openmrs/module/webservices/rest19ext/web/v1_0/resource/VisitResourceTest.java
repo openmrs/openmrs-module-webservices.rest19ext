@@ -43,6 +43,7 @@ public class VisitResourceTest extends BaseDelegatingResourceTest<VisitResource,
 		assertPropPresent("encounters");
 		assertPropEquals("startDatetime", getObject().getStartDatetime());
 		assertPropEquals("stopDatetime", getObject().getStopDatetime());
+		assertPropPresent("attributes");
 		assertPropEquals("voided", getObject().isVoided());
 	}
 	
@@ -59,6 +60,7 @@ public class VisitResourceTest extends BaseDelegatingResourceTest<VisitResource,
 		assertPropPresent("encounters");
 		assertPropEquals("startDatetime", getObject().getStartDatetime());
 		assertPropEquals("stopDatetime", getObject().getStopDatetime());
+		assertPropPresent("attributes");
 		assertPropEquals("voided", getObject().isVoided());
 		assertPropPresent("auditInfo");
 	}
