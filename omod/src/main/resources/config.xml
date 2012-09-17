@@ -19,23 +19,8 @@
 	
     <require_version>1.9.0</require_version>
     <require_modules>
-        <require_module>org.openmrs.module.webservices.rest</require_module>
+        <require_module version="1.1">org.openmrs.module.webservices.rest</require_module>
     </require_modules>
-	
-    <!-- Extensions -->
-	
-    <!-- AOP -->
-	
-    <!-- Required Privileges -->
-
-    <!-- Required Global Properties -->
-    
-
-    <!-- DWR -->
-	
-    <!-- Servlets -->
-	
-    <!-- Filters -->
 	
     <!-- Internationalization -->
     <!-- All message codes should start with moduleId.* -->
