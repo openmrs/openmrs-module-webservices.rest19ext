@@ -3,7 +3,7 @@
 
     <groupId>org.openmrs.module</groupId>
     <artifactId>webservices.rest19ext</artifactId>
-    <version>1.0</version>
+    <version>1.1-SNAPSHOT</version>
     <packaging>pom</packaging>
     <name>Rest Web Services 1.9 Extension</name>
     <description>Parent project for the Rest Web Services 1.9 Extension Module</description>
@@ -11,9 +11,9 @@
     <url>http://wiki.openmrs.org/display/docs/WebServices</url>
 
     <scm>
-        <connection>scm:svn:https://svn.openmrs.org/openmrs-modules/webservices.rest19ext/tags/webservices.rest19ext-1.0</connection>
-        <developerConnection>scm:svn:https://svn.openmrs.org/openmrs-modules/webservices.rest19ext/tags/webservices.rest19ext-1.0</developerConnection>
-        <url>https://svn.openmrs.org/openmrs-modules/webservices.rest19ext/tags/webservices.rest19ext-1.0</url>
+        <connection>scm:svn:https://svn.openmrs.org/openmrs-modules/webservices.rest19ext/trunk/</connection>
+        <developerConnection>scm:svn:https://svn.openmrs.org/openmrs-modules/webservices.rest19ext/trunk/</developerConnection>
+        <url>https://svn.openmrs.org/openmrs-modules/webservices.rest19ext/trunk/</url>
     </scm>
 
     <distributionManagement>
