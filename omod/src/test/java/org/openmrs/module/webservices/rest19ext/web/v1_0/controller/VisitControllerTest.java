@@ -108,6 +108,20 @@ public class VisitControllerTest extends BaseModuleWebContextSensitiveTest {
 	}
 	
 	@Test
+	public void shouldCreateAVisitWithAttributes() throws Exception {
+		int originalCount = service.getAllVisits().size();
+		String json = "{ \"patient\":\"5946f880-b197-400b-9caa-a3c661d23041\", \"visitType\":\""
+		        + Rest19ExtTestConstants.VISIT_TYPE_UUID + "\", \"location\":\"" + Rest19ExtTestConstants.LOCATION_UUID
+		        + "\", \"startDatetime\":\"" + DATE_FORMAT.format(new Date()) + "\","
+		        + "\"attributes\":[{\"attributeType\":\"" + Rest19ExtTestConstants.VISIT_ATTRIBUTE_TYPE_UUID
+		        + "\",\"value\":\"2012-12-01\"}]}";
+		SimpleObject post = new ObjectMapper().readValue(json, SimpleObject.class);
+		Object newVisit = controller.create(post, request, response);
+		Assert.assertNotNull(PropertyUtils.getProperty(newVisit, "uuid"));
+		Assert.assertEquals(originalCount + 1, service.getAllVisits().size());
+	}
+	
+	@Test
 	public void shouldEditAVisit() throws Exception {
 		final String newVisitTypeUuid = Rest19ExtTestConstants.VISIT_TYPE_UUID;
 		final String newLocationUuid = "9356400c-a5a2-4532-8f2b-2361b3446eb8";

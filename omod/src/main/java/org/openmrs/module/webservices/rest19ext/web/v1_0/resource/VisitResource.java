@@ -12,13 +12,17 @@
  */
 package org.openmrs.module.webservices.rest19ext.web.v1_0.resource;
 
+import java.util.Set;
+
 import org.openmrs.Patient;
 import org.openmrs.Visit;
+import org.openmrs.VisitAttribute;
 import org.openmrs.annotation.Handler;
 import org.openmrs.api.context.Context;
 import org.openmrs.module.webservices.rest.SimpleObject;
 import org.openmrs.module.webservices.rest.web.RequestContext;
 import org.openmrs.module.webservices.rest.web.RestConstants;
+import org.openmrs.module.webservices.rest.web.annotation.PropertySetter;
 import org.openmrs.module.webservices.rest.web.annotation.Resource;
 import org.openmrs.module.webservices.rest.web.api.RestService;
 import org.openmrs.module.webservices.rest.web.representation.DefaultRepresentation;
@@ -199,5 +203,19 @@ public class VisitResource extends DataDelegatingCrudResource<Visit> {
 	@Override
 	public String getResourceVersion() {
 		return "1.9";
+	}
+	
+	/**
+	 * Sets the attributes of a visit
+	 *
+	 * @param visit the visit whose attributes to set
+	 * @param attributes the attributes to set
+	 */
+	@PropertySetter("attributes")
+	public static void setAttributes(Visit visit, Set<VisitAttribute> attributes) {
+		for (VisitAttribute attribute : attributes) {
+			attribute.setOwner(visit);
+		}
+		visit.setAttributes(attributes);
 	}
 }
