@@ -11,9 +11,9 @@
     <url>http://wiki.openmrs.org/display/docs/WebServices</url>
 
     <scm>
-        <connection>scm:svn:https://svn.openmrs.org/openmrs-modules/webservices.rest19ext/trunk/</connection>
-        <developerConnection>scm:svn:https://svn.openmrs.org/openmrs-modules/webservices.rest19ext/trunk/</developerConnection>
-        <url>https://svn.openmrs.org/openmrs-modules/webservices.rest19ext/trunk/</url>
+        <connection>scm:git:https://github.com/openmrs/openmrs-module-webservices.rest19ext/</connection>
+        <developerConnection>scm:git:https://github.com/openmrs/openmrs-module-webservices.rest19ext/</developerConnection>
+        <url>https://github.com/openmrs/openmrs-module-webservices.rest19ext/</url>
     </scm>
 
     <distributionManagement>
