@@ -59,6 +59,8 @@ public class ProviderControllerTest extends BaseCrudControllerTest {
 		    new MockHttpServletResponse());
 		Util.log("Created Provider", newProvider);
 		Assert.assertEquals(before + 1, Context.getProviderService().getAllProviders().size());
+		Provider provider = (Provider) Context.getProviderService().getAllProviders().get(1);
+		Assert.assertEquals(1, provider.getAttributes().size());
 	}
 	
 	/**
