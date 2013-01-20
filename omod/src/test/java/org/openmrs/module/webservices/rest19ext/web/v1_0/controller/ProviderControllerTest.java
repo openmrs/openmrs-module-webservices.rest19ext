@@ -46,6 +46,22 @@ public class ProviderControllerTest extends BaseCrudControllerTest {
 	}
 	
 	/**
+	 * @verifies create a new Provider with Attributes
+	 */
+	@Test
+	public void createProvider_shouldCreateANewProviderWithAttributes() throws Exception {
+		int before = Context.getProviderService().getAllProviders().size();
+		String json = "{ \"person\": \"da7f524f-27ce-4bb2-86d6-6d1d05312bd5\"," + "\"identifier\":\"abc123ez\","
+		        + "\"attributes\":[{\"attributeType\":\"" + Rest19ExtTestConstants.PROVIDER_ATTRIBUTE_TYPE_UUID
+		        + "\",\"value\":\"2005-01-01\"}]}";
+		SimpleObject post = new ObjectMapper().readValue(json, SimpleObject.class);
+		Object newProvider = new ProviderController().create(post, new MockHttpServletRequest(),
+		    new MockHttpServletResponse());
+		Util.log("Created Provider", newProvider);
+		Assert.assertEquals(before + 1, Context.getProviderService().getAllProviders().size());
+	}
+	
+	/**
 	 * @see ProviderController#getProvider(Provider,WebRequest)
 	 * @verifies get a default representation of a Provider
 	 */
