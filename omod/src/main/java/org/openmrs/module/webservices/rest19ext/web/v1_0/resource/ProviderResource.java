@@ -12,6 +12,9 @@
 package org.openmrs.module.webservices.rest19ext.web.v1_0.resource;
 
 import java.util.List;
+import java.util.Set;
+import org.openmrs.ProviderAttribute;
+import org.openmrs.module.webservices.rest.web.annotation.PropertySetter;
 import org.openmrs.Provider;
 import org.openmrs.annotation.Handler;
 import org.openmrs.api.context.Context;
@@ -67,6 +70,20 @@ public class ProviderResource extends MetadataDelegatingCrudResource<Provider> {
 			return description;
 		}
 		return null;
+	}
+	
+	/**
+	 * Sets the attributes of a Provider
+	 *
+	 * @param provider whose attributes to be set
+	 * @param attributes the attributes to be set
+	 */
+	@PropertySetter("attributes")
+	public static void setAttributes(Provider provider, Set<ProviderAttribute> attributes) {
+		for (ProviderAttribute attribute : attributes) {
+			attribute.setOwner(provider);
+		}
+		provider.setAttributes(attributes);
 	}
 	
 	/**
